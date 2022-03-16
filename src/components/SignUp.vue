@@ -19,7 +19,11 @@
     <input type="checkbox" v-model="like" value="no" />
     <label for="">Skils</label>
     <input type="text" @keyup.alt="skil" v-model="skilName" />
-    <div v-for="skils in skils">{{ skils }}</div>
+    <div class="block">
+      <div v-for="skils in skils" :skil="skils">
+        <span @click="del(skils)">{{ skils }}</span>
+      </div>
+    </div>
   </form>
   <p class="text">Email: {{ email }}</p>
   <p class="text">Password: {{ code }}</p>
@@ -47,13 +51,14 @@ export default {
       if (e.key === ",") {
         if (this.skilName !== "," && !this.skils.includes(this.skilName)) {
           this.skils.push(this.skilName);
-          console.log(this.skils);
         }
         this.skilName = "";
       }
-      //   if (condition) {
-
-      //   }
+    },
+    del(skil) {
+      this.skils = this.skils.filter((item) => {
+        return skil !== item;
+      });
     },
   },
 };
@@ -64,7 +69,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  row-gap: 20px;
+  row-gap: 15px;
   margin-bottom: 30px;
 }
 .sup label {
@@ -80,6 +85,24 @@ export default {
 .sup select {
   align-self: start;
   border: 1px solid grey;
+  padding: 10px 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.sup div label {
+  margin-left: 10px;
+}
+.block {
+  display: flex;
+  column-gap: 10px;
+}
+.block div {
+  background-color: grey;
+  border-radius: 20px;
+  font-size: 22px;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 .text {
   font-size: 18px;
