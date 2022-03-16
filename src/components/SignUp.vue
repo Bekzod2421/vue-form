@@ -1,9 +1,10 @@
 <template>
-  <form action="" class="sup">
+  <form action="" class="sup" @submit.prevent="submit">
     <label for="">Email</label>
     <input type="email" required v-model="email" />
     <label for="">Password</label>
     <input type="password" required v-model="code" />
+    <div class="error" v-if="codeError">{{ codeError }}</div>
     <label for=""> Select course</label>
     <select name="" id="" v-model="kurs">
       <option value="dev">Web Developer</option>
@@ -24,6 +25,7 @@
         <span @click="del(skils)">{{ skils }}</span>
       </div>
     </div>
+    <div class="submit"><button>Create an account</button></div>
   </form>
   <p class="text">Email: {{ email }}</p>
   <p class="text">Password: {{ code }}</p>
@@ -43,6 +45,7 @@ export default {
       terms: true,
       like: [],
       skilName: "",
+      codeError: "",
       skils: [],
     };
   },
@@ -59,6 +62,10 @@ export default {
       this.skils = this.skils.filter((item) => {
         return skil !== item;
       });
+    },
+    submit() {
+      this.codeError = this.code.length > 5 ? "" : "Password must be at 6";
+      console.log("Email:", this.email);
     },
   },
 };
@@ -79,12 +86,11 @@ export default {
 }
 .sup input {
   border-bottom: 1px solid grey;
-  padding: 5px 0;
   font-size: 24px;
 }
 .sup select {
-  align-self: start;
-  border: 1px solid grey;
+  /* align-self: start; */
+  border-bottom: 1px solid grey;
   padding: 10px 10px;
   cursor: pointer;
   font-size: 20px;
@@ -103,6 +109,21 @@ export default {
   color: #fff;
   padding: 5px 10px;
   cursor: pointer;
+}
+.submit {
+  display: flex;
+  justify-content: center;
+}
+.submit button {
+  border-radius: 30px;
+  padding: 10px 15px;
+  background-color: seagreen;
+  font-weight: bold;
+  font-size: 18px;
+  color: #fff;
+}
+.error {
+  color: #ff0062;
 }
 .text {
   font-size: 18px;
