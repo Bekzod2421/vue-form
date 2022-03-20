@@ -21,7 +21,7 @@
     <label for="">Skils</label>
     <input type="text" @keyup.alt="skil" v-model="skilName" />
     <div class="block">
-      <div v-for="skils in skils" :skil="skils">
+      <div v-for="skils in skils" :key="skils">
         <span @click="del(skils)">{{ skils }}</span>
       </div>
     </div>
