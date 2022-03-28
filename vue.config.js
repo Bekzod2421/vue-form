@@ -1,8 +1,5 @@
-// const { defineConfig } = require('@vue/cli-service')
-// module.exports = defineConfig({
-// 	transpileDependencies: true
-// })
-
-module.exports = {
-	publicPath: '/vue-form/'
-}
+const { defineConfig } = require('@vue/cli-service')
+module.exports = defineConfig({
+	base: '/vue-form/',
+	transpileDependencies: true
+})
